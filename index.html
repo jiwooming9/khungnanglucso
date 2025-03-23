@@ -872,7 +872,7 @@
             
             // Check if all questions in the current section are answered
             const currentSectionEl = sections[currentSection];
-            const questions = currentSectionEl.querySelectorAll('input[type="radio"][required]');
+            const questions = currentSectionEl.querySelectorAll('input[type="radio"]');
             const questionsPerGroup = {};
             
             // Group questions by name
@@ -921,7 +921,7 @@
             
             // Send data to Google Sheet
             // Replace with your actual Google Apps Script URL
-            const googleScriptURL = 'https://script.google.com/macros/s/AKfycbw_4zVeeD3nYM4d-VkrTQnTsRi3Ibtxzv2G6QCzT5XgS4MYoDAwnKxzPkjVFJaT3GsS/exec';
+            const googleScriptURL = 'https://script.google.com/macros/s/AKfycbzA5PEC-TXs9m3hBY4iO4RtrCRq2yI2Yf-ihojoyTYJpQWWBoCnndFsF7xHGB-r01LW/exec';
             
             fetch(googleScriptURL, {
                 method: 'POST',
