@@ -12,6 +12,19 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentSection = 0;
     const totalSections = sections.length;
     
+    // Thêm sự kiện click cho các label để đảm bảo radio button được chọn đúng
+    document.querySelectorAll('.option-label').forEach(label => {
+        label.addEventListener('click', function() {
+            const radioId = this.getAttribute('for');
+            const radio = document.getElementById(radioId);
+            if (radio) {
+                radio.checked = true;
+                // Đánh dấu trực tiếp để đảm bảo chắc chắn
+                radio.setAttribute('checked', 'checked');
+            }
+        });
+    });
+    
     // Show first section
     showSection(currentSection);
     updateProgressBar();
@@ -44,25 +57,19 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function nextSection() {
         const currentSectionEl = sections[currentSection];
-        const requiredQuestionGroups = {};
+        const questionNames = new Set();
         
-        // Lấy tất cả các radio button được đánh dấu required trong section hiện tại
-        const requiredRadios = currentSectionEl.querySelectorAll('input[type="radio"][required]');
-        
-        // Nhóm các radio button theo tên (mỗi câu hỏi)
-        requiredRadios.forEach(radio => {
-            const name = radio.getAttribute('name');
-            if (!requiredQuestionGroups[name]) {
-                requiredQuestionGroups[name] = [];
-            }
-            requiredQuestionGroups[name].push(radio);
+        // Lấy tất cả các tên câu hỏi trong section hiện tại
+        currentSectionEl.querySelectorAll('input[type="radio"][required]').forEach(radio => {
+            questionNames.add(radio.getAttribute('name'));
         });
         
-        // Kiểm tra xem mỗi nhóm có ít nhất một radio được chọn không
+        // Kiểm tra từng câu hỏi
         let allAnswered = true;
-        for (const name in requiredQuestionGroups) {
-            // Kiểm tra xem có radio nào trong nhóm này được chọn không
-            const isAnswered = Array.from(requiredQuestionGroups[name]).some(radio => radio.checked);
+        for (const name of questionNames) {
+            const radioButtons = currentSectionEl.querySelectorAll(`input[name="${name}"]`);
+            const isAnswered = Array.from(radioButtons).some(radio => radio.checked);
+            
             if (!isAnswered) {
                 allAnswered = false;
                 break;
@@ -113,25 +120,19 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Check if all questions in the current section are answered
         const currentSectionEl = sections[currentSection];
-        const requiredQuestionGroups = {};
+        const questionNames = new Set();
         
-        // Lấy tất cả các radio button được đánh dấu required trong section hiện tại
-        const requiredRadios = currentSectionEl.querySelectorAll('input[type="radio"][required]');
-        
-        // Nhóm các radio button theo tên (mỗi câu hỏi)
-        requiredRadios.forEach(radio => {
-            const name = radio.getAttribute('name');
-            if (!requiredQuestionGroups[name]) {
-                requiredQuestionGroups[name] = [];
-            }
-            requiredQuestionGroups[name].push(radio);
+        // Lấy tất cả các tên câu hỏi trong section hiện tại
+        currentSectionEl.querySelectorAll('input[type="radio"][required]').forEach(radio => {
+            questionNames.add(radio.getAttribute('name'));
         });
         
-        // Kiểm tra xem mỗi nhóm có ít nhất một radio được chọn không
+        // Kiểm tra từng câu hỏi
         let allAnswered = true;
-        for (const name in requiredQuestionGroups) {
-            // Kiểm tra xem có radio nào trong nhóm này được chọn không
-            const isAnswered = Array.from(requiredQuestionGroups[name]).some(radio => radio.checked);
+        for (const name of questionNames) {
+            const radioButtons = currentSectionEl.querySelectorAll(`input[name="${name}"]`);
+            const isAnswered = Array.from(radioButtons).some(radio => radio.checked);
+            
             if (!isAnswered) {
                 allAnswered = false;
                 break;
