@@ -44,22 +44,25 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function nextSection() {
         const currentSectionEl = sections[currentSection];
-        const questions = currentSectionEl.querySelectorAll('input[type="radio"][required]');
-        const questionsPerGroup = {};
+        const requiredQuestionGroups = {};
         
-        // Group questions by name
-        questions.forEach(question => {
-            const name = question.getAttribute('name');
-            if (!questionsPerGroup[name]) {
-                questionsPerGroup[name] = [];
+        // Lấy tất cả các radio button được đánh dấu required trong section hiện tại
+        const requiredRadios = currentSectionEl.querySelectorAll('input[type="radio"][required]');
+        
+        // Nhóm các radio button theo tên (mỗi câu hỏi)
+        requiredRadios.forEach(radio => {
+            const name = radio.getAttribute('name');
+            if (!requiredQuestionGroups[name]) {
+                requiredQuestionGroups[name] = [];
             }
-            questionsPerGroup[name].push(question);
+            requiredQuestionGroups[name].push(radio);
         });
         
-        // Check if at least one option is selected for each question group
+        // Kiểm tra xem mỗi nhóm có ít nhất một radio được chọn không
         let allAnswered = true;
-        for (const name in questionsPerGroup) {
-            const isAnswered = Array.from(questionsPerGroup[name]).some(q => q.checked);
+        for (const name in requiredQuestionGroups) {
+            // Kiểm tra xem có radio nào trong nhóm này được chọn không
+            const isAnswered = Array.from(requiredQuestionGroups[name]).some(radio => radio.checked);
             if (!isAnswered) {
                 allAnswered = false;
                 break;
@@ -110,22 +113,25 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Check if all questions in the current section are answered
         const currentSectionEl = sections[currentSection];
-        const questions = currentSectionEl.querySelectorAll('input[type="radio"][required]');
-        const questionsPerGroup = {};
+        const requiredQuestionGroups = {};
         
-        // Group questions by name
-        questions.forEach(question => {
-            const name = question.getAttribute('name');
-            if (!questionsPerGroup[name]) {
-                questionsPerGroup[name] = [];
+        // Lấy tất cả các radio button được đánh dấu required trong section hiện tại
+        const requiredRadios = currentSectionEl.querySelectorAll('input[type="radio"][required]');
+        
+        // Nhóm các radio button theo tên (mỗi câu hỏi)
+        requiredRadios.forEach(radio => {
+            const name = radio.getAttribute('name');
+            if (!requiredQuestionGroups[name]) {
+                requiredQuestionGroups[name] = [];
             }
-            questionsPerGroup[name].push(question);
+            requiredQuestionGroups[name].push(radio);
         });
         
-        // Check if at least one option is selected for each question group
+        // Kiểm tra xem mỗi nhóm có ít nhất một radio được chọn không
         let allAnswered = true;
-        for (const name in questionsPerGroup) {
-            const isAnswered = Array.from(questionsPerGroup[name]).some(q => q.checked);
+        for (const name in requiredQuestionGroups) {
+            // Kiểm tra xem có radio nào trong nhóm này được chọn không
+            const isAnswered = Array.from(requiredQuestionGroups[name]).some(radio => radio.checked);
             if (!isAnswered) {
                 allAnswered = false;
                 break;
