@@ -806,7 +806,7 @@
         
         function nextSection() {
             const currentSectionEl = sections[currentSection];
-            const questions = currentSectionEl.querySelectorAll('input[type="radio"][required]');
+            const questions = currentSectionEl.querySelectorAll('input[type="radio"]');
             const questionsPerGroup = {};
             
             // Group questions by name
