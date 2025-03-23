@@ -55,18 +55,8 @@ function submitForm(e) {
           submitLoader.classList.add('hidden');
           
           if (response.success) {
-            // Hiển thị thông báo thành công
             form.innerHTML = `
-              <div class="bg-white rounded-lg shadow-md p-6 text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-500 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <h2 class="text-2xl font-bold mb-4">Cảm ơn đồng chí đã hoàn thành khảo sát!</h2>
-                <p class="mb-6">Kết quả của đồng chí đã được ghi nhận thành công.</p>
-                <button type="button" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors" onclick="window.location.reload()">
-                  Thực hiện khảo sát mới
-                </button>
-              </div>
+              
             `;
             showToast('Đã lưu kết quả thành công!', 'success');
           } else {
