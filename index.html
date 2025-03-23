@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khảo Sát Năng Lực Số - Phòng PC06</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body class="pb-10 bg-gray-50">
+    <div id="toast" class="toast"></div>
+    
+    <header class="bg-white shadow-md py-4 mb-6">
+        <div class="container mx-auto px-4 flex items-center justify-between">
+            <div class="flex items-center">
+                <img src="./assets/logo-cand.png" alt="Logo CAND" class="header-logo mr-4" onerror="this.src='https://via.placeholder.com/80'">
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold text-gray-800">BỘ KHẢO SÁT ĐÁNH GIÁ NĂNG LỰC SỐ</h1>
+                    <p class="text-gray-600">Phòng PC06</p>
+                </div>
+            </div>
+            <div class="hidden md:block">
+                <p class="text-sm text-gray-600">Tài liệu nội bộ</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 survey-container">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-3">Hướng dẫn</h2>
+            <ul class="list-disc pl-6 space-y-2">
+                <li>Bộ khảo sát này nhằm đánh giá mức độ thành thạo các kỹ năng số của cán bộ, chiến sĩ Phòng PC06</li>
+                <li>Mỗi câu hỏi có 4 đáp án tương ứng với 4 mức độ hoàn thiện: Cơ bản, Trung bình, Nâng cao, Chuyên sâu</li>
+                <li>Kính mời đồng chí chọn đáp án phản ánh đúng nhất năng lực hiện tại của mình</li>
+                <li>Đây là đánh giá để hỗ trợ phát triển năng lực, không phải để xét thi đua, khen thưởng</li>
+                <li>Kết quả khảo sát sẽ được Phòng PV01 tổng hợp lưu trữ tập trung để phân tích và đề xuất chương trình đào tạo phù hợp</li>
+            </ul>
+        </div>
+
+        <form id="surveyForm" class="space-y-6">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h2 class="text-xl font-semibold mb-4">Thông tin cá nhân</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Họ và tên</label>
+                        <input type="text" id="fullName" name="fullName" class="w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                    </div>
+                    <div>
+                        <label for="position" class="block text-sm font-medium text-gray-700 mb-1">Chức vụ</label>
+                        <input type="text" id="position" name="position" class="w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                    </div>
+                    <div>
+                        <label for="department" class="block text-sm font-medium text-gray-700 mb-1">Đội nghiệp vụ</label>
+                        <input type="text" id="department" name="department" class="w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                    </div>
+                    <div style="display: none;">
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-bar-container no-print">
+                <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+            </div>
+
+            <!-- Section 1 -->
+            <div id="section1" class="question-section">
+                <h2 class="section-title text-xl font-bold text-blue-800 mb-4">PHẦN 1: VẬN HÀNH THIẾT BỊ VÀ PHẦN MỀM</h2>
+                
+                <div class="question-card bg-white rounded-lg p-6 mb-6">
+                    <h3 class="text-lg font-semibold mb-3">Câu 1: Đồng chí đánh giá thế nào về khả năng sử dụng thiết bị công nghệ (máy tính, điện thoại) của mình?</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <input type="radio" id="q1a" name="q1" value="A" class="mt-1 mr-2 opacity-0 absolute" required>
+                            <label for="q1a" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">A. Mức cơ bản</span>
+                                <p class="text-gray-600 text-sm mt-1">Biết cách sử dụng các thiết bị thông dụng và hiểu công dụng cơ bản của chúng. Có thể sử dụng các thiết bị được trang bị để thực hiện công việc hàng ngày.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q1b" name="q1" value="B" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q1b" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">B. Mức trung bình</span>
+                                <p class="text-gray-600 text-sm mt-1">Xử lý được các sự cố thông thường khi sử dụng thiết bị. Biết cách bảo quản, bảo vệ thiết bị trong quá trình sử dụng. Phân tích được nguyên nhân khi thiết bị gặp vấn đề.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q1c" name="q1" value="C" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q1c" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">C. Mức nâng cao</span>
+                                <p class="text-gray-600 text-sm mt-1">Có thể cài đặt, tùy chỉnh thiết bị theo yêu cầu công việc. Hướng dẫn được đồng nghiệp cách xử lý các vấn đề kỹ thuật. Đề xuất được các giải pháp xử lý khi gặp sự cố.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q1d" name="q1" value="D" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q1d" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">D. Mức chuyên sâu</span>
+                                <p class="text-gray-600 text-sm mt-1">Nắm vững nguyên lý hoạt động và có thể xử lý các vấn đề kỹ thuật phức tạp. Đề xuất được cách tận dụng tối đa tính năng của thiết bị. Nghiên cứu, áp dụng các công nghệ mới vào công tác.</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card bg-white rounded-lg p-6 mb-6">
+                    <h3 class="text-lg font-semibold mb-3">Câu 2: Mức độ thành thạo của đồng chí trong việc sử dụng phần mềm và dịch vụ số là gì?</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <input type="radio" id="q2a" name="q2" value="A" class="mt-1 mr-2 opacity-0 absolute" required>
+                            <label for="q2a" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">A. Mức cơ bản</span>
+                                <p class="text-gray-600 text-sm mt-1">Sử dụng được các phần mềm văn phòng cơ bản (soạn thảo văn bản, bảng tính). Lưu trữ, xử lý và truy xuất được dữ liệu đơn giản trong máy tính.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q2b" name="q2" value="B" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q2b" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">B. Mức trung bình</span>
+                                <p class="text-gray-600 text-sm mt-1">Sử dụng thành thạo các phần mềm ứng dụng văn phòng và phần mềm nghiệp vụ được trang bị. Có thể cài đặt, cập nhật phần mềm thông dụng khi cần thiết.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q2c" name="q2" value="C" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q2c" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">C. Mức nâng cao</span>
+                                <p class="text-gray-600 text-sm mt-1">Hiểu rõ nguyên lý hoạt động của phần mềm và dịch vụ số. Giải quyết được các vấn đề kỹ thuật phát sinh và hướng dẫn được người khác sử dụng.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q2d" name="q2" value="D" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q2d" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">D. Mức chuyên sâu</span>
+                                <p class="text-gray-600 text-sm mt-1">Đề xuất được cách cải tiến, nâng cấp phần mềm và dịch vụ số. Khai thác triệt để các tính năng phục vụ công tác. Phát triển các quy trình ứng dụng hiệu quả.</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2 -->
+            <div id="section2" class="question-section hidden">
+                <h2 class="section-title text-xl font-bold text-blue-800 mb-4">PHẦN 2: KHAI THÁC DỮ LIỆU</h2>
+                
+                <div class="question-card bg-white rounded-lg p-6 mb-6">
+                    <h3 class="text-lg font-semibold mb-3">Câu 3: Khả năng tìm kiếm thông tin trên Internet phục vụ công việc của đồng chí như thế nào?</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <input type="radio" id="q3a" name="q3" value="A" class="mt-1 mr-2 opacity-0 absolute" required>
+                            <label for="q3a" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">A. Mức cơ bản</span>
+                                <p class="text-gray-600 text-sm mt-1">Biết cách sử dụng công cụ tìm kiếm cơ bản. Xác định được nguồn thông tin và sử dụng từ khóa đơn giản để tìm kiếm. Sử dụng các công cụ dịch (Google Translate, Bing Translator) khi cần thiết.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q3b" name="q3" value="B" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q3b" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">B. Mức trung bình</span>
+                                <p class="text-gray-600 text-sm mt-1">Sử dụng được các toán tử tìm kiếm nâng cao. Nhận biết được các rủi ro trong quá trình tìm kiếm. Kiểm tra được tính xác thực của nguồn thông tin. Vận dụng được các từ khóa chuyên ngành.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q3c" name="q3" value="C" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q3c" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">C. Mức nâng cao</span>
+                                <p class="text-gray-600 text-sm mt-1">Xây dựng và điều chỉnh được chiến lược tìm kiếm hiệu quả. Tổng hợp thông tin từ nhiều nguồn để tạo báo cáo có giá trị. Phân tích sâu về độ tin cậy của thông tin thu thập được.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q3d" name="q3" value="D" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q3d" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">D. Mức chuyên sâu</span>
+                                <p class="text-gray-600 text-sm mt-1">Sử dụng thành thạo các công cụ, kỹ thuật chuyên sâu để tìm kiếm thông tin từ nhiều nguồn khác nhau. Đề xuất quy trình tìm kiếm, khai thác thông tin hiệu quả cho công tác nghiệp vụ.</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card bg-white rounded-lg p-6 mb-6">
+                    <h3 class="text-lg font-semibold mb-3">Câu 4: Đồng chí quản lý và chia sẻ dữ liệu trong công việc như thế nào?</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <input type="radio" id="q4a" name="q4" value="A" class="mt-1 mr-2 opacity-0 absolute" required>
+                            <label for="q4a" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">A. Mức cơ bản</span>
+                                <p class="text-gray-600 text-sm mt-1">Phân loại được dữ liệu thành các danh mục, thư mục cơ bản. Sử dụng thông tin thu thập được theo đúng quy định và pháp luật hiện hành.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q4b" name="q4" value="B" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q4b" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">B. Mức trung bình</span>
+                                <p class="text-gray-600 text-sm mt-1">Sắp xếp dữ liệu khoa học và có hệ thống. Sử dụng được các nền tảng lưu trữ đám mây. Chia sẻ dữ liệu đúng quy định, đảm bảo an toàn thông tin.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q4c" name="q4" value="C" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q4c" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">C. Mức nâng cao</span>
+                                <p class="text-gray-600 text-sm mt-1">Sử dụng thành thạo các phần mềm quản lý dữ liệu chuyên dụng. Phân tích và đánh giá giá trị dữ liệu trước khi chia sẻ. Hướng dẫn được người khác về cách tổ chức lưu trữ dữ liệu.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q4d" name="q4" value="D" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q4d" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">D. Mức chuyên sâu</span>
+                                <p class="text-gray-600 text-sm mt-1">Đề xuất các phương pháp tổ chức, lưu trữ, đồng bộ dữ liệu hiệu quả. Xây dựng các giải pháp quản lý dữ liệu an toàn. Đánh giá và cải tiến quy trình quản lý dữ liệu hiện có.</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Continue with Sections 3-6 -->
+                        <div class="flex items-start">
+                            <input type="radio" id="q10b" name="q10" value="B" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q10b" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">B. Mức trung bình</span>
+                                <p class="text-gray-600 text-sm mt-1">Hiểu rõ nhiều loại nguy cơ an ninh mạng khác nhau. Nhận diện được các dấu hiệu bất thường trong hệ thống. Thực hiện các biện pháp ứng phó ban đầu khi phát hiện sự cố.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q10c" name="q10" value="C" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q10c" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">C. Mức nâng cao</span>
+                                <p class="text-gray-600 text-sm mt-1">Phân tích được các phương thức tấn công mạng phức tạp. Triển khai các giải pháp bảo mật nâng cao. Hướng dẫn người khác về các biện pháp phòng tránh nguy cơ an ninh mạng.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q10d" name="q10" value="D" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q10d" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">D. Mức chuyên sâu</span>
+                                <p class="text-gray-600 text-sm mt-1">Xây dựng các chiến lược phòng thủ toàn diện. Đánh giá và quản lý rủi ro an ninh mạng có hệ thống. Phát triển các kế hoạch ứng phó sự cố và khôi phục hệ thống sau tấn công.</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5 -->
+            <div id="section5" class="question-section hidden">
+                <h2 class="section-title text-xl font-bold text-blue-800 mb-4">PHẦN 5: TẠO LẬP NỘI DUNG SỐ</h2>
+                
+                <div class="question-card bg-white rounded-lg p-6 mb-6">
+                    <h3 class="text-lg font-semibold mb-3">Câu 11: Khả năng tạo lập nội dung số (văn bản, hình ảnh, video) của đồng chí như thế nào?</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <input type="radio" id="q11a" name="q11" value="A" class="mt-1 mr-2 opacity-0 absolute" required>
+                            <label for="q11a" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">A. Mức cơ bản</span>
+                                <p class="text-gray-600 text-sm mt-1">Tạo được các nội dung số đơn giản như văn bản, bảng biểu. Hiểu được các định dạng file phổ biến. Tuân thủ quy định cơ bản về bản quyền khi sử dụng nội dung.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q11b" name="q11" value="B" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q11b" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">B. Mức trung bình</span>
+                                <p class="text-gray-600 text-sm mt-1">Sử dụng thành thạo các công cụ để tạo lập nội dung đa dạng. Biết cách chỉnh sửa hình ảnh, âm thanh cơ bản. Sử dụng công cụ trí tuệ nhân tạo hỗ trợ tạo nội dung.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q11c" name="q11" value="C" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q11c" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">C. Mức nâng cao</span>
+                                <p class="text-gray-600 text-sm mt-1">Tích hợp được nhiều loại nội dung (văn bản, hình ảnh, âm thanh, video) tạo sản phẩm hoàn chỉnh. Phân tích được tác động của nội dung tới người tiếp nhận.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q11d" name="q11" value="D" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q11d" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">D. Mức chuyên sâu</span>
+                                <p class="text-gray-600 text-sm mt-1">Đề xuất các phương pháp mới trong tạo lập nội dung số. Phát triển nội dung chuyên nghiệp, sáng tạo và có giá trị cao. Xây dựng quy trình sản xuất nội dung số hiệu quả.</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card bg-white rounded-lg p-6 mb-6">
+                    <h3 class="text-lg font-semibold mb-3">Câu 12: Hiểu biết của đồng chí về pháp luật khi tạo lập và sử dụng nội dung số như thế nào?</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <input type="radio" id="q12a" name="q12" value="A" class="mt-1 mr-2 opacity-0 absolute" required>
+                            <label for="q12a" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">A. Mức cơ bản</span>
+                                <p class="text-gray-600 text-sm mt-1">Hiểu các yêu cầu cơ bản về bản quyền và quyền riêng tư. Biết cách trích dẫn nguồn khi sử dụng tài liệu từ người khác. Tôn trọng quyền tác giả trong tạo lập nội dung.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q12b" name="q12" value="B" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q12b" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">B. Mức trung bình</span>
+                                <p class="text-gray-600 text-sm mt-1">Nắm vững các nguyên tắc pháp lý về bản quyền, nhãn hiệu và quyền tác giả. Áp dụng các biện pháp bảo vệ nội dung khi phát hành. Tôn trọng quyền của người sáng tạo nội dung.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q12c" name="q12" value="C" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q12c" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">C. Mức nâng cao</span>
+                                <p class="text-gray-600 text-sm mt-1">Phân tích được các vấn đề pháp lý phức tạp khi phát triển nội dung. Thúc đẩy tuân thủ pháp luật trong tổ chức. Giải quyết được các tình huống phát sinh về bản quyền.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q12d" name="q12" value="D" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q12d" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">D. Mức chuyên sâu</span>
+                                <p class="text-gray-600 text-sm mt-1">Đề xuất phương pháp mới để đảm bảo tuân thủ pháp luật trong tạo lập nội dung. Phát triển các chính sách, quy trình về sở hữu trí tuệ cho tổ chức. Hướng dẫn tập thể về quyền tác giả.</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card bg-white rounded-lg p-6 mb-6">
+                    <h3 class="text-lg font-semibold mb-3">Câu 13: Mức độ hiểu biết và kỹ năng lập trình, phát triển ứng dụng của đồng chí là gì?</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <input type="radio" id="q13a" name="q13" value="A" class="mt-1 mr-2 opacity-0 absolute" required>
+                            <label for="q13a" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">A. Mức cơ bản</span>
+                                <p class="text-gray-600 text-sm mt-1">Hiểu được cách máy tính xử lý thông tin và khái niệm cơ bản về lập trình. Biết cách sử dụng các lệnh đơn giản để thực hiện tác vụ cơ bản. Nhận thức được tầm quan trọng của lập trình.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q13b" name="q13" value="B" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q13b" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">B. Mức trung bình</span>
+                                <p class="text-gray-600 text-sm mt-1">Biết cách sử dụng ngôn ngữ lập trình để phát triển ứng dụng đơn giản. So sánh được các ngôn ngữ lập trình phổ biến. Hiểu được cấu trúc dữ liệu và giải thuật cơ bản.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q13c" name="q13" value="C" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q13c" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">C. Mức nâng cao</span>
+                                <p class="text-gray-600 text-sm mt-1">Sử dụng thành thạo một hoặc nhiều ngôn ngữ lập trình. Phát triển được ứng dụng giải quyết vấn đề cụ thể. Tùy chỉnh mã nguồn để tối ưu hiệu suất ứng dụng.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q13d" name="q13" value="D" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q13d" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">D. Mức chuyên sâu</span>
+                                <p class="text-gray-600 text-sm mt-1">Phát triển các ứng dụng phức tạp với nhiều tính năng. Đánh giá và cải tiến chất lượng mã nguồn. Hướng dẫn người khác phát triển ứng dụng theo tiêu chuẩn chuyên nghiệp.</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6 -->
+            <div id="section6" class="question-section hidden">
+                <h2 class="section-title text-xl font-bold text-blue-800 mb-4">PHẦN 6: THỰC HIỆN CÁC HOẠT ĐỘNG NGHIỆP VỤ CÔNG AN LIÊN QUAN ĐẾN KỸ THUẬT SỐ</h2>
+                
+                <div class="question-card bg-white rounded-lg p-6 mb-6">
+                    <h3 class="text-lg font-semibold mb-3">Câu 14: Mức độ ứng dụng công nghệ số của đồng chí trong công tác nghiệp vụ là gì?</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <input type="radio" id="q14a" name="q14" value="A" class="mt-1 mr-2 opacity-0 absolute" required>
+                            <label for="q14a" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">A. Mức cơ bản</span>
+                                <p class="text-gray-600 text-sm mt-1">Sử dụng được các phần mềm nghiệp vụ cơ bản được trang bị. Biết cách ứng dụng công nghệ số vào công việc hàng ngày. Tuân thủ quy trình sử dụng hệ thống thông tin.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q14b" name="q14" value="B" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q14b" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">B. Mức trung bình</span>
+                                <p class="text-gray-600 text-sm mt-1">Vận hành thành thạo các thiết bị và phần mềm nghiệp vụ. Tổ chức được các hoạt động làm việc nhóm, hội thảo trực tuyến. Phân tích và xử lý các vấn đề phát sinh.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q14c" name="q14" value="C" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q14c" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">C. Mức nâng cao</span>
+                                <p class="text-gray-600 text-sm mt-1">Lựa chọn và áp dụng công nghệ mới phù hợp vào công tác. Tổng hợp kiến thức để giải quyết vấn đề kỹ thuật phức tạp. Đánh giá được hiệu quả của các giải pháp công nghệ.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q14d" name="q14" value="D" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q14d" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">D. Mức chuyên sâu</span>
+                                <p class="text-gray-600 text-sm mt-1">Đánh giá và đề xuất ứng dụng công nghệ tiên tiến vào công tác. Tối ưu hóa quy trình nghiệp vụ bằng công nghệ số. Phát triển các giải pháp sáng tạo cho đơn vị.</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card bg-white rounded-lg p-6 mb-6">
+                    <h3 class="text-lg font-semibold mb-3">Câu 15: Đồng chí nhận thức và đánh giá như thế nào về vai trò của chuyển đổi số đối với ngành Công an?</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <input type="radio" id="q15a" name="q15" value="A" class="mt-1 mr-2 opacity-0 absolute" required>
+                            <label for="q15a" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">A. Mức cơ bản</span>
+                                <p class="text-gray-600 text-sm mt-1">Hiểu được tầm quan trọng của chuyển đổi số đối với ngành Công an. Biết một số kết quả chuyển đổi số của ngành. Nhận thức được các công nghệ hỗ trợ chuyển đổi số.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q15b" name="q15" value="B" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q15b" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">B. Mức trung bình</span>
+                                <p class="text-gray-600 text-sm mt-1">Mô tả được các công nghệ tiêu biểu trong chuyển đổi số. Trình bày được sự phát triển của công nghệ trí tuệ nhân tạo. Liệt kê được các văn bản quan trọng về chuyển đổi số.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q15c" name="q15" value="C" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q15c" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">C. Mức nâng cao</span>
+                                <p class="text-gray-600 text-sm mt-1">Phân tích được tác động của công nghệ mới đối với công tác Công an. Đánh giá được nguồn nhân lực cần thiết cho chuyển đổi số. Ứng dụng công nghệ mới vào công tác chuyên môn.</p>
+                            </label>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="radio" id="q15d" name="q15" value="D" class="mt-1 mr-2 opacity-0 absolute">
+                            <label for="q15d" class="option-label block w-full p-3 rounded-md cursor-pointer">
+                                <span class="font-medium">D. Mức chuyên sâu</span>
+                                <p class="text-gray-600 text-sm mt-1">Đề xuất ý tưởng chuyển đổi số mới phục vụ ngành Công an. Chủ động tham mưu, đề xuất văn bản chiến lược về chuyển đổi số. Lãnh đạo các sáng kiến số trong đơn vị.</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation buttons -->
+            <div class="flex justify-between mt-6 no-print">
+                <button type="button" id="prevBtn" class="px-6 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors hidden">
+                    <span class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                        Quay lại
+                    </span>
+                </button>
+                <button type="button" id="nextBtn" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors ml-auto">
+                    <span class="flex items-center">
+                        Tiếp theo
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                </button>
+                <button type="submit" id="submitBtn" class="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors hidden">
+                    <span class="flex items-center" id="submitBtnText">
+                        Hoàn thành khảo sát
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                    <span id="submitLoader" class="loader hidden"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <footer class="mt-8 bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p>© Đội 1.</p>
+            <p class="text-sm mt-2">Khảo sát Năng lực số trong Phòng PC06</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
