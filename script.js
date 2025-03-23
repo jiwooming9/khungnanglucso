@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
             params.append('callback', callback);
             
             // Thêm script vào document
-            script.src = 'https://script.google.com/macros/s/AKfycbwNX3TmzzoU77XsguVohUzzCmBDdQEN7DLIv6wt_AyJ_oON6ZM5lEGSgUSipBd-k_wu/exec?' + params.toString();
+            script.src = 'https://script.google.com/macros/s/AKfycbxEv4tBP4BKQFLcdzumZPM2R_6vmTkw8BLpVvYa_dcuKOZgRJ3afwv-4qfT_ai5wKKf/exec?' + params.toString();
             document.body.appendChild(script);
             
             // Xử lý lỗi
