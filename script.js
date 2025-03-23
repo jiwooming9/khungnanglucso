@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         function nextSection() {
             const currentSectionEl = sections[currentSection];
-            const questions = currentSectionEl.querySelectorAll('input[type="radio"]');
+            const questions = currentSectionEl.querySelectorAll('input[type="radio"][required]');
             const questionsPerGroup = {};
             
             // Group questions by name
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Check if all questions in the current section are answered
             const currentSectionEl = sections[currentSection];
-            const questions = currentSectionEl.querySelectorAll('input[type="radio"]');
+            const questions = currentSectionEl.querySelectorAll('input[type="radio"][required]');
             const questionsPerGroup = {};
             
             // Group questions by name
